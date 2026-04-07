@@ -2,19 +2,21 @@
        PROGRAM-ID. BANK.
        DATA DIVISION.
            WORKING-STORAGE SECTION.
-           01  PERSON-INFO.
-               02  FORNAVN         PIC X(20).
-               02  EFTERNAVN       PIC X(20).
-               02  ALDER           PIC 9(3).
-               02  ADDRESSE.
-                   03  VEJNAVN     PIC X(30).
+           01  KUNDEOPLYSNINGER.
+               02  KUNDE-ID            PIC X(10).
+               02  FORNAVN             PIC X(20).
+               02  EFTERNAVN           PIC X(20).
+               02  KONTOINFO.
+                   03  KONTONUMMER     PIC X(20).
       * V9(2) ER DET SAMME SOM V99 
-       01  BALANCE         PIC S9(7)V9(2).
-       01  VALUTAKODE      PIC X(3).
-       01  IX              PIC 9(2).
-       01  IX2             PIC 9(2) VALUE 1.
-       01  CURRENT-CHAR    PIC X(1).
-       01  PREVIOUS-CHAR   PIC X(1) VALUE SPACE.
+                   03  BALANCE         PIC S9(7)V9(2).
+                   03  VALUTAKODE      PIC X(3).
+           01  FULDT-NAVN              PIC X(40).
+           01  RENS-FULDT-NAVN         PIC X(40).
+           01  IX                      PIC 9(2).
+           01  IX2                     PIC 9(2) VALUE 1.
+           01  CURRENT-CHAR            PIC X(1).
+           01  PREVIOUS-CHAR           PIC X(1) VALUE SPACE.
        PROCEDURE DIVISION.
        MOVE 1234567890 TO KUNDE-ID.
        MOVE "Lars" TO FORNAVN.
@@ -44,4 +46,5 @@
        DISPLAY "Kontonummer : " KONTONUMMER
        DISPLAY "Balance     : " BALANCE " " VALUTAKODE
        DISPLAY "-----------------------------------"
+       DISPLAY KUNDEOPLYSNINGER
        STOP RUN.
