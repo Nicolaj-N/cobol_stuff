@@ -1,13 +1,13 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. BANK.
        DATA DIVISION.
-       WORKING-STORAGE SECTION.
-       01  KUNDE-ID        PIC X(10).
-       01  FORNAVN         PIC X(20).
-       01  EFTERNAVN       PIC X(20).
-       01  FULDT-NAVN      PIC X(40).
-       01  RENS-FULDT-NAVN PIC X(40).
-       01  KONTONUMMER     PIC X(20).
+           WORKING-STORAGE SECTION.
+           01  PERSON-INFO.
+               02  FORNAVN         PIC X(20).
+               02  EFTERNAVN       PIC X(20).
+               02  ALDER           PIC 9(3).
+               02  ADDRESSE.
+                   03  VEJNAVN     PIC X(30).
       * V9(2) ER DET SAMME SOM V99 
        01  BALANCE         PIC S9(7)V9(2).
        01  VALUTAKODE      PIC X(3).
