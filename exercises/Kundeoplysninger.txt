@@ -1,0 +1,3 @@
+1234567890Lars                Hansen              DK12345678912345    000250075DKKMainStreet                    12   2    TV   Copenhagen          2100DK12345678lars.hansen@email.com           
+9999999999Mogens              Hansen              DK98765432198765    000750050DKKBakerStreet                   5    1    MF   Aarhus              8000DK87654321mogens.hansen@email.com        
+5555555555Anna                Jensen              DK11223344556677    001200000DKKOsterbrogade                  45   3    TH   Copenhagen          2100DK11223344anna.jensen@email.com          
