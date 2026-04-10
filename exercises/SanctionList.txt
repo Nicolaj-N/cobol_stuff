@@ -1,0 +1,200 @@
+S175 Anne J.             M.N.                Ali Smith           Smith J.            Lisa Smith          A.S.                1975-11-02DK
+S136 Alexander Wilson    John                Anne J.             J. Doe              Mickey              J.S.                1982-09-29DE
+S021 Daniel Martin       Annie J.            John Smith          -                   -                   -                   1980-05-15IT
+S002 William Brown       M.N.                Johnny              Alice S.            Anne J.             Ali Smith           1992-03-22DE
+S195 Isabella Clark      Alice S.            Mikael              -                   -                   -                   1980-05-15IT
+S166 Alexander Wilson    Alicia Smith        Ali Smith           John S.             Mikael              Johnny              1977-10-03DE
+S182 Michael Nilsen      Johnny Smith        Alice S.            John Smith          J.S.                -                   1977-10-03ES
+S004 James White         Mikael              John Smith          John S.             -                   -                   1978-11-11DK
+S012 Tom Anderson        Anne J.             John S.             Alicia Smith        Johnny Smith        -                   1977-10-03SE
+S134 Lucas Miller        Alicia Smith        John                Jonathan Doe        Mikael              -                   1982-09-29NO
+S054 Benjamin Moore      A.S.                -                   -                   -                   -                   1985-06-18ES
+S138 William Brown       Mikael              Johnny Smith        Anne J.             -                   -                   1965-04-12DE
+S065 Emma Olson          Ali Smith           Mikael              -                   -                   -                   1978-11-11US
+S148 Benjamin Moore      Jon D.              A. Jensen           -                   -                   -                   1990-07-15DE
+S187 Tom Anderson        John                Jon D.              Jonathan Doe        A.S.                Anne J.             1977-10-03DK
+S026 Emma Olson          J. Doe              Anna                Michael N.          M.N.                -                   1978-11-11IT
+S143 James White         Johnny              John Smith          Ali Smith           Michael N.          -                   1980-05-15US
+S137 Benjamin Moore      Anna                Jonathan Doe        -                   -                   -                   1985-06-18SE
+S105 Olivia Johnson      A. Jensen           J.S.                -                   -                   -                   1995-07-14NO
+S114 Charlotte Taylor    Mike                A. Jensen           M.N.                Mickey              John S.             1977-10-03GB
+S091 Charlotte Taylor    J.S.                John                -                   -                   -                   1992-03-22DK
+S073 Amelia Thomas       Ali Smith           John Smith          John                -                   -                   1988-01-10FR
+S124 Emily Harris        Mikael              Jonathan Doe        Annie J.            -                   -                   1978-11-11IT
+S114 Amelia Thomas       J. Doe              -                   -                   -                   -                   1985-06-18IT
+S193 James White         Mikael              Smith J.            Johnny              -                   -                   1990-07-15SE
+S160 Charlotte Taylor    Mickey              Alicia Smith        John Smith          Michael N.          -                   1978-11-11IT
+S111 James White         J.S.                Jon D.              J. Doe              John S.             -                   1977-10-03ES
+S049 Grace Walker        Mikael              A. Jensen           -                   -                   -                   1995-07-14DK
+S014 Jacob Hall          Johnny Smith        Johnny              J.S.                John S.             Lisa Smith          1978-11-11SE
+S122 Lucas Miller        A.S.                Anita               -                   -                   -                   1978-11-11DE
+S115 Sara H.             Johnny              A.S.                Ali Smith           -                   -                   1980-05-15ES
+S073 Grace Walker        Anna                Mike                -                   -                   -                   1980-05-15GB
+S106 Amelia Thomas       Johnny Smith        Michael N.          A. Jensen           Jon D.              -                   1978-11-11IT
+S150 Tom Anderson        Michael N.          Jon D.              -                   -                   -                   1990-07-15IT
+S003 Isabella Clark      John S.             Johnny Smith        -                   -                   -                   1988-01-10IT
+S029 Alexander Wilson    Lisa Smith          Annie J.            -                   -                   -                   1992-03-22DE
+S163 James White         A. Jensen           J.S.                -                   -                   -                   1995-07-14GB
+S185 Alexander Wilson    Smith J.            Alicia Smith        Johnny              -                   -                   1982-09-29IT
+S130 Olivia Johnson      Anna                Smith J.            A.S.                -                   -                   1995-07-14SE
+S144 Lucas Miller        John S.             Ali Smith           -                   -                   -                   1990-07-15DE
+S053 Sophia Davis        Lisa Smith          -                   -                   -                   -                   1985-06-18CA
+S011 Grace Walker        Mickey              -                   -                   -                   -                   1990-07-15DK
+S049 Tom Anderson        John S.             Jonathan Doe        Michael N.          -                   -                   1995-07-14IT
+S182 Emma Olson          A. Jensen           J.S.                Jon D.              Mickey              -                   1982-09-29US
+S067 Alexander Wilson    Lisa Smith          Johnny              Anita               -                   -                   1993-02-25SE
+S029 Lucas Rodriguez     John S.             Johnny              John Smith          Mikael              Johnny Smith        1995-07-14ES
+S077 Emma Olson          Anita               -                   -                   -                   -                   1985-06-18CA
+S026 Tom Anderson        Ali Smith           Annie J.            A. Jensen           -                   -                   1965-04-12CA
+S049 Sara H.             Alicia Smith        -                   -                   -                   -                   1988-01-10IT
+S042 Emma Olson          Mickey              John S.             Mikael              Alice S.            Mike                1965-04-12GB
+S124 Lucas Rodriguez     Mikael              Smith J.            Jon D.              John Smith          J.S.                1980-05-15NO
+S005 Alicia Smith        John                John S.             Anne J.             Anita               Jon D.              1995-07-14NO
+S190 Daniel Martin       Anne J.             J. Doe              Annie J.            -                   -                   1995-07-14NO
+S122 Lucas Rodriguez     J. Doe              Alicia Smith        -                   -                   -                   1990-07-15FR
+S148 Sara H.             Alicia Smith        Michael N.          Ali Smith           J. Doe              Lisa Smith          1992-03-22IT
+S008 Lucas Miller        Michael N.          Alice S.            Ali Smith           -                   -                   1988-01-10DK
+S084 Jacob Hall          J. Doe              Michael N.          Jonathan Doe        Mickey              -                   1975-11-02GB
+S160 Daniel Martin       Anna                Mikael              Ali Smith           Annie J.            A. Jensen           1992-03-22GB
+S200 Olivia Johnson      John                M.N.                -                   -                   -                   1977-10-03GB
+S002 Tom Anderson        Alicia Smith        Annie J.            Mikael              Johnny Smith        -                   1993-02-25ES
+S167 Jonathan Doe        J. Doe              -                   -                   -                   -                   1985-06-18US
+S142 Charlotte Taylor    John S.             Lisa Smith          -                   -                   -                   1980-05-15CA
+S156 Anne J.             Alice S.            Johnny              A.S.                Anne J.             Lisa Smith          1995-07-14SE
+S052 Sara H.             Johnny Smith        -                   -                   -                   -                   1993-02-25ES
+S148 Grace Walker        Smith J.            Alice S.            John S.             Alicia Smith        -                   1982-09-29IT
+S146 Charlotte Taylor    Mikael              Anna                Smith J.            Lisa Smith          -                   1975-11-02ES
+S075 Alexander Wilson    Anna                J.S.                Alice S.            John                -                   1977-10-03DK
+S167 Amelia Thomas       Alice S.            M.N.                J.S.                Annie J.            -                   1975-11-02DE
+S148 Alexander Wilson    Anna                -                   -                   -                   -                   1982-09-29SE
+S027 Jacob Hall          Mike                J.S.                M.N.                Alicia Smith        -                   1985-06-18SE
+S130 Daniel Martin       Anne J.             John S.             Anita               -                   -                   1988-01-10IT
+S061 James White         John                -                   -                   -                   -                   1977-10-03US
+S017 Isabella Clark      A.S.                Alice S.            J. Doe              Smith J.            -                   1992-03-22DK
+S133 Alexander Wilson    Johnny              -                   -                   -                   -                   1990-07-15SE
+S159 Anne J.             Alice S.            A. Jensen           Johnny Smith        John S.             -                   1995-07-14GB
+S067 Charlotte Taylor    Smith J.            Anne J.             A.S.                Anna                A. Jensen           1965-04-12IT
+S129 Jonathan Doe        Smith J.            -                   -                   -                   -                   1990-07-15US
+S031 Lucas Rodriguez     Jonathan Doe        Jon D.              Annie J.            -                   -                   1978-11-11DK
+S055 Sophia Davis        Mickey              -                   -                   -                   -                   1992-03-22ES
+S191 John Smith          John                -                   -                   -                   -                   1985-06-18GB
+S163 Emma Olson          Anne J.             -                   -                   -                   -                   1990-07-15NO
+S104 Grace Walker        M.N.                -                   -                   -                   -                   1975-11-02SE
+S198 Lucas Miller        Mikael              Michael N.          Ali Smith           Johnny              -                   1980-05-15DK
+S060 Grace Walker        Alicia Smith        Anita               Anne J.             John S.             -                   1990-07-15DK
+S104 Emma Olson          J. Doe              John Smith          J.S.                -                   -                   1965-04-12SE
+S108 Alexander Wilson    J. Doe              Mikael              Johnny Smith        -                   -                   1965-04-12CA
+S179 Emily Harris        J. Doe              John                Jonathan Doe        -                   -                   1965-04-12ES
+S021 James White         Alice S.            -                   -                   -                   -                   1995-07-14CA
+S182 Lucas Rodriguez     John Smith          John                Smith J.            -                   -                   1975-11-02NO
+S195 Jonathan Doe        Michael N.          -                   -                   -                   -                   1977-10-03NO
+S006 Isabella Clark      John                M.N.                Johnny Smith        Mike                J.S.                1993-02-25GB
+S042 Michael Nilsen      Jon D.              Michael N.          John S.             Alice S.            -                   1990-07-15DE
+S198 Sara H.             Ali Smith           Jonathan Doe        J. Doe              Johnny Smith        John                1975-11-02GB
+S087 Isabella Clark      Mike                John Smith          John S.             Alice S.            -                   1975-11-02FR
+S160 Lucas Miller        Smith J.            J. Doe              Mikael              -                   -                   1980-05-15ES
+S072 Benjamin Moore      Michael N.          Johnny              John                Alicia Smith        -                   1992-03-22IT
+S068 Alicia Smith        A.S.                John S.             Alice S.            Jon D.              -                   1975-11-02NO
+S109 Tom Anderson        Johnny Smith        Michael N.          Anne J.             Ali Smith           -                   1995-07-14FR
+S112 William Brown       Anita               Jon D.              M.N.                Jonathan Doe        -                   1995-07-14CA
+S052 Anne J.             M.N.                Johnny              Anita               Annie J.            Smith J.            1988-01-10CA
+S196 Benjamin Moore      Johnny              John Smith          Michael N.          John                -                   1980-05-15FR
+S059 Emily Harris        Michael N.          -                   -                   -                   -                   1985-06-18US
+S177 Lucas Miller        John                -                   -                   -                   -                   1980-05-15ES
+S105 Tom Anderson        Mikael              Anna                Jonathan Doe        A. Jensen           -                   1965-04-12DK
+S102 William Brown       M.N.                A. Jensen           Alice S.            Smith J.            Jon D.              1978-11-11ES
+S043 John Smith          Anita               Alicia Smith        Annie J.            Anne J.             Johnny Smith        1993-02-25NO
+S028 Amelia Thomas       Michael N.          Anita               Johnny              Alice S.            -                   1988-01-10GB
+S140 Jacob Hall          Mickey              John Smith          Annie J.            Alicia Smith        -                   1980-05-15FR
+S064 Tom Anderson        Mickey              -                   -                   -                   -                   1988-01-10DK
+S083 Lucas Miller        Mikael              -                   -                   -                   -                   1965-04-12US
+S009 Sophia Davis        John                A.S.                Michael N.          Anita               -                   1995-07-14FR
+S019 James White         M.N.                John Smith          Lisa Smith          -                   -                   1985-06-18US
+S034 James White         Lisa Smith          John Smith          -                   -                   -                   1975-11-02DE
+S171 James White         Johnny Smith        Annie J.            Ali Smith           Jon D.              -                   1982-09-29DK
+S093 Olivia Johnson      A. Jensen           Smith J.            -                   -                   -                   1978-11-11GB
+S134 Alexander Wilson    Anita               Michael N.          Mike                Lisa Smith          -                   1965-04-12SE
+S045 Isabella Clark      Anna                -                   -                   -                   -                   1980-05-15NO
+S082 Olivia Johnson      Ali Smith           Anita               Alice S.            -                   -                   1988-01-10DE
+S196 Alexander Wilson    Anna                Mikael              John Smith          -                   -                   1990-07-15IT
+S096 John Smith          Lisa Smith          J. Doe              -                   -                   -                   1992-03-22SE
+S169 Mia Lewis           Anne J.             Alice S.            J.S.                -                   -                   1993-02-25FR
+S064 Emma Olson          Anna                John                -                   -                   -                   1988-01-10ES
+S191 Jonathan Doe        Jonathan Doe        Michael N.          -                   -                   -                   1975-11-02FR
+S169 Emily Harris        A.S.                Lisa Smith          John S.             Jon D.              A. Jensen           1992-03-22DE
+S105 Olivia Johnson      Anita               M.N.                Smith J.            Mikael              -                   1993-02-25ES
+S073 Olivia Johnson      Alicia Smith        Anita               -                   -                   -                   1990-07-15DK
+S046 John Smith          Alicia Smith        -                   -                   -                   -                   1993-02-25DE
+S067 Sophia Davis        John Smith          Anne J.             Johnny Smith        Lisa Smith          -                   1995-07-14IT
+S115 Tom Anderson        Johnny              -                   -                   -                   -                   1975-11-02ES
+S009 Sophia Davis        John                A.S.                -                   -                   -                   1980-05-15IT
+S187 Tom Anderson        Alicia Smith        A.S.                -                   -                   -                   1990-07-15GB
+S115 Charlotte Taylor    J. Doe              Smith J.            -                   -                   -                   1977-10-03NO
+S071 Grace Walker        Annie J.            Ali Smith           -                   -                   -                   1992-03-22GB
+S162 James White         John S.             J.S.                Ali Smith           A. Jensen           Jon D.              1993-02-25US
+S191 Jonathan Doe        J. Doe              Lisa Smith          Anita               John S.             -                   1977-10-03NO
+S060 Sara H.             Mikael              John                -                   -                   -                   1965-04-12NO
+S011 Lucas Rodriguez     Alicia Smith        -                   -                   -                   -                   1993-02-25IT
+S125 Grace Walker        Anne J.             Jonathan Doe        -                   -                   -                   1993-02-25FR
+S060 Anne J.             Smith J.            J.S.                Michael N.          Mickey              Ali Smith           1965-04-12DE
+S194 Amelia Thomas       J.S.                Anita               -                   -                   -                   1992-03-22FR
+S025 Lucas Miller        Johnny              M.N.                -                   -                   -                   1965-04-12DK
+S079 Grace Walker        A. Jensen           A.S.                Alicia Smith        Jonathan Doe        Anita               1980-05-15DK
+S119 Michael Nilsen      M.N.                Lisa Smith          A.S.                Jon D.              -                   1977-10-03IT
+S129 Alexander Wilson    M.N.                Michael N.          -                   -                   -                   1988-01-10GB
+S177 Sophia Davis        John Smith          A.S.                Johnny Smith        -                   -                   1977-10-03CA
+S026 Benjamin Moore      Smith J.            Jonathan Doe        John                -                   -                   1965-04-12US
+S182 Alicia Smith        Anna                John                M.N.                A.S.                John Smith          1990-07-15NO
+S038 Sophia Davis        Lisa Smith          -                   -                   -                   -                   1977-10-03GB
+S161 Michael Nilsen      J.S.                -                   -                   -                   -                   1988-01-10IT
+S086 Amelia Thomas       Mike                Johnny              M.N.                Alice S.            Annie J.            1990-07-15US
+S112 James White         Michael N.          A. Jensen           -                   -                   -                   1985-06-18FR
+S123 Isabella Clark      Alice S.            Smith J.            M.N.                J.S.                -                   1982-09-29ES
+S176 Isabella Clark      Johnny Smith        Alice S.            A.S.                Jonathan Doe        -                   1978-11-11US
+S020 William Brown       Annie J.            Johnny Smith        A. Jensen           -                   -                   1977-10-03NO
+S055 John Smith          J. Doe              Mike                Smith J.            Mikael              -                   1978-11-11NO
+S194 Olivia Johnson      Annie J.            Anne J.             -                   -                   -                   1982-09-29NO
+S123 Jacob Hall          Mikael              Johnny Smith        Annie J.            -                   -                   1975-11-02FR
+S169 Mia Lewis           Lisa Smith          Jon D.              A. Jensen           Annie J.            -                   1977-10-03US
+S133 Jonathan Doe        A.S.                -                   -                   -                   -                   1982-09-29CA
+S153 Mia Lewis           John                Lisa Smith          John S.             Johnny              A. Jensen           1978-11-11ES
+S082 Jacob Hall          John                Michael N.          -                   -                   -                   1982-09-29IT
+S139 Lucas Rodriguez     Mickey              Mike                Alice S.            Alicia Smith        John S.             1965-04-12GB
+S011 Alicia Smith        M.N.                Alicia Smith        Lisa Smith          J.S.                Mickey              1993-02-25FR
+S146 Charlotte Taylor    Mickey              -                   -                   -                   -                   1988-01-10DK
+S064 Isabella Clark      J.S.                Jon D.              Mike                Alicia Smith        J. Doe              1995-07-14DE
+S139 Sophia Davis        M.N.                Anna                Jonathan Doe        -                   -                   1965-04-12ES
+S065 Charlotte Taylor    Mikael              Anna                -                   -                   -                   1992-03-22SE
+S086 Alexander Wilson    A. Jensen           J. Doe              Johnny              Ali Smith           -                   1978-11-11ES
+S119 Sophia Davis        Ali Smith           Anna                -                   -                   -                   1988-01-10ES
+S001 Tom Anderson        Mickey              A. Jensen           Ali Smith           J. Doe              -                   1982-09-29DK
+S026 Tom Anderson        John Smith          Lisa Smith          Mickey              -                   -                   1977-10-03DK
+S159 Olivia Johnson      John Smith          -                   -                   -                   -                   1982-09-29ES
+S003 Alexander Wilson    Johnny              J.S.                Alice S.            Lisa Smith          -                   1995-07-14DE
+S163 Mia Lewis           Anne J.             -                   -                   -                   -                   1990-07-15CA
+S063 James White         Lisa Smith          Mickey              -                   -                   -                   1995-07-14ES
+S099 John Smith          J. Doe              M.N.                Mike                Johnny              Lisa Smith          1975-11-02SE
+S199 Jonathan Doe        J. Doe              Anita               J.S.                Mikael              Johnny Smith        1992-03-22DE
+S021 John Smith          Jonathan Doe        -                   -                   -                   -                   1990-07-15FR
+S158 Amelia Thomas       Ali Smith           John S.             J.S.                -                   -                   1982-09-29ES
+S160 Emily Harris        Mikael              Ali Smith           Smith J.            -                   -                   1975-11-02US
+S029 Benjamin Moore      A. Jensen           -                   -                   -                   -                   1975-11-02NO
+S156 Sophia Davis        A.S.                Anne J.             John S.             Mike                -                   1985-06-18DK
+S141 Tom Anderson        J. Doe              -                   -                   -                   -                   1965-04-12SE
+S147 Benjamin Moore      M.N.                Lisa Smith          -                   -                   -                   1980-05-15ES
+S090 Sophia Davis        John S.             Anne J.             -                   -                   -                   1990-07-15US
+S100 Michael Nilsen      J.S.                Jon D.              Lisa Smith          John S.             John Smith          1993-02-25DK
+S038 Grace Walker        Alicia Smith        -                   -                   -                   -                   1985-06-18SE
+S105 Anne J.             Lisa Smith          John                -                   -                   -                   1992-03-22DE
+S119 Lucas Miller        M.N.                John                J.S.                -                   -                   1990-07-15IT
+S028 Anne J.             J. Doe              John                Mickey              -                   -                   1993-02-25GB
+S129 Tom Anderson        Alicia Smith        Mickey              Jon D.              -                   -                   1980-05-15GB
+S020 Charlotte Taylor    Ali Smith           A. Jensen           Alicia Smith        Anna                John Smith          1992-03-22IT
+S149 Lucas Miller        A.S.                J. Doe              Michael N.          Johnny Smith        -                   1990-07-15NO
+S016 Alicia Smith        Jonathan Doe        Annie J.            Mikael              Mickey              -                   1985-06-18US
+S081 Jonathan Doe        Lisa Smith          Michael N.          Ali Smith           Mickey              -                   1980-05-15IT
+S170 Amelia Thomas       Johnny              J. Doe              A.S.                -                   -                   1980-05-15ES
+S063 Lucas Miller        Anita               -                   -                   -                   -                   1988-01-10NO
+S069 Charlotte Taylor    A.S.                Johnny Smith        -                   -                   -                   1965-04-12SE
+S073 Tom Anderson        Mickey              Anna                -                   -                   -                   1980-05-15FR
+S037 Emma Olson          J.S.                -                   -                   -                   -                   1992-03-22DE

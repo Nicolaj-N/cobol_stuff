@@ -19,8 +19,8 @@
            COPY "KUNDER2.cpy".
        FD INPUT-FILE-2.
        01 KONTO-RECORD.
-           COPY "KONTOOPL.cpy" 
-           REPLACING ==KUNDE-ID== BY ==ACC-KUNDE-ID==.
+           COPY "KONTOOPL.cpy". 
+      *    REPLACING ==KUNDE-ID== BY ==ACC-KUNDE-ID==.
        FD OUTPUT-FILE.
        01 OUTPUT-RECORD.
            02  NAVN-ADR            PIC X(100).
@@ -59,14 +59,15 @@
                            AT END
                                MOVE "Y" TO EOF2
                            NOT AT END
-                               IF ACC-KUNDE-ID = KUNDE-ID
+                               IF KUNDE-ID OF INPUT-RECORD = KUNDE-ID
+                                   OF KONTO-RECORD
                                    MOVE KONTO-RECORD TO OUTPUT-RECORD
                                    WRITE OUTPUT-RECORD
                                END-IF
                            END-READ
                        END-PERFORM
-                       
-                       MOVE KUNDE-ID TO NAVN-ADR
+
+                       MOVE KUNDE-ID OF INPUT-RECORD TO NAVN-ADR
                        MOVE NAVN-ADR TO OUTPUT-RECORD
                        WRITE OUTPUT-RECORD
                        PERFORM FORMAT-NAVN

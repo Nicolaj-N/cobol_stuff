@@ -1,0 +1,24 @@
+1234567890DK88888888OPSPARINGELLERHVADXX555555789DKK
+1234567890
+Lars                 Hansen
+MainStreet                     12   2    TV
+2100 Copenhagen                12   2    TV
+12345678
+lars.hansen@email.com
+
+9999999999DK88888888OPSPARINGELLERHVADXX555555789DKK
+9999999999
+Mogens               Hansen
+BakerStreet                    5    1    MF
+8000 Aarhus                    5    1    MF
+87654321
+mogens.hansen@email.com
+
+5555555555DK88888888OPSPARINGELLERHVADXX555555789DKK
+5555555555
+Anna                 Jensen
+Osterbrogade                   45   3    TH
+2100 Copenhagen                45   3    TH
+11223344
+anna.jensen@email.com
+
