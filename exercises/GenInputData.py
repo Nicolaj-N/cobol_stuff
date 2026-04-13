@@ -30,7 +30,7 @@ STORES = [
 ]
 
 # Fiktive banknavne
-BANK_NAMES = ["Danske Bank", "Nordea", "Jyske Bank", "Sydbank", "Nykredit Bank", "Arbejdernes Landsbank", "Spar Nord Bank", "Handelsbanken"]
+BANK_NAMES = ["Danske Bank", "Nordea", "Jyske Bank", "Sydbank", "Nykredit Bank", "Arbejdernes Bank", "Spar Nord Bank", "Handelsbanken"]
 
 # Fiktive valutakoder og transaktionstyper
 VALUTA_CODES = ["DKK", "USD", "EUR"]
@@ -82,8 +82,22 @@ def generate_bank_data():
         email = f"kontakt@{bank_name.replace(' ', '').lower()}.dk"
         bank_data.append((reg_number, bank_name, bank_address, phone_number, email))
     return bank_data
+# def write_fixed(text, length):
+#     encoded = text.encode("cp1252", errors="strict")
+#     return encoded[:length].ljust(length, b" ").decode("cp1252")
 
-# Generér bankfil
+# bank_data = generate_bank_data()
+# with open(BANK_FILE, "wb") as bank_file:
+#     for reg_number, bank_name, bank_address, phone_number, email in bank_data:
+#         record = (
+#             write_fixed(reg_number, 4) +
+#             write_fixed(bank_name, 30) +
+#             write_fixed(bank_address, 50) +
+#             write_fixed(phone_number, 15) +
+#             write_fixed(email, 30)
+#         )
+#         bank_file.write((record + "\n").encode("cp1252"))
+# # Generér bankfil
 bank_data = generate_bank_data()
 with open(BANK_FILE, "w") as bank_file:
     for reg_number, bank_name, bank_address, phone_number, email in bank_data:

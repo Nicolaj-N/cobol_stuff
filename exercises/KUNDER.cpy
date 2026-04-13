@@ -5,7 +5,7 @@
            03  KONTONUMMER     PIC X(20) VALUE SPACES.
            03  BALANCE         PIC S9(7)V9(2) VALUE ZEROES.
            03  VALUTAKODE      PIC X(3) VALUE SPACES.
-       02  ADDRESSE.
+       02  ADRESSE.
            03    VEJNAVN       PIC X(30) VALUE SPACES.
            03    HUSNR         PIC X(5) VALUE SPACES.
            03    ETAGE         PIC X(5) VALUE SPACES.
