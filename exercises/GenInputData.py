@@ -135,12 +135,12 @@ with open(TRANSACTION_FILE, "w") as file:
                 f"{cpr:<15}"             # Kundenummer (CPR-format)
                 f"{navn:<30}"            # Navn
                 f"{adresse:<50}"         # Adresse
-                f"{fødselsdato:<11}"     # Fødselsdato (10 tegn + 1 mellemrum)
-                f"{konto_nummer:<14}"    # Kontonummer (12 tegn + 2 mellemrum)
-                f"{reg_nummer:<6}"       # Registreringsnummer
-                f"{transaktions_beløb:>15.2f}"  # Højrestil beløb
+                f"{fødselsdato:<10}"     # Fødselsdato (10 tegn + 1 mellemrum)
+                f"{konto_nummer:<15}"    # Kontonummer (12 tegn + 2 mellemrum)
+                f"{reg_nummer:<4}"       # Registreringsnummer
+                f"{transaktions_beløb:>11.2f}"  # Højrestil beløb
                 f"{valutakode:<4}"       # Valutakode
-                f"{transaktions_type:<20}"  # Transaktionstype
+                f"{transaktions_type:<15}"  # Transaktionstype
                 f"{butik:<20}"           # Butik
                 f"{timestamp:<26}"       # Timestamp
             )
