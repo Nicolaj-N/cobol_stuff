@@ -99,7 +99,7 @@ def generate_bank_data():
 #         bank_file.write((record + "\n").encode("cp1252"))
 # # Generér bankfil
 bank_data = generate_bank_data()
-with open(BANK_FILE, "w") as bank_file:
+with open(BANK_FILE, "w", encoding="cp1252", newline="") as bank_file:
     for reg_number, bank_name, bank_address, phone_number, email in bank_data:
         bank_record = (
             f"{reg_number:<4}"         # Registreringsnummer (4 tegn)
@@ -113,7 +113,7 @@ with open(BANK_FILE, "w") as bank_file:
 # Generér transaktionsfil
 bank_registrations = [bank[0] for bank in bank_data]  # Liste med alle registreringsnumre fra bankfilen
 
-with open(TRANSACTION_FILE, "w") as file:
+with open(TRANSACTION_FILE, "w", encoding="cp1252", newline="") as file:
     for i in range(1, NUM_CUSTOMERS + 1):  # Loop over kunder
         cpr, fødselsdato = generate_cpr()  # Generér CPR og fødselsdato
         konto_nummer = generate_account_number()  # Generér kontonummer
@@ -138,8 +138,8 @@ with open(TRANSACTION_FILE, "w") as file:
                 f"{fødselsdato:<10}"     # Fødselsdato (10 tegn + 1 mellemrum)
                 f"{konto_nummer:<15}"    # Kontonummer (12 tegn + 2 mellemrum)
                 f"{reg_nummer:<4}"       # Registreringsnummer
-                f"{transaktions_beløb:>11.2f}"  # Højrestil beløb
-                f"{valutakode:<4}"       # Valutakode
+                f"{transaktions_beløb:<11.2f}"  # Højrestil beløb
+                f"{valutakode:<3}"       # Valutakode
                 f"{transaktions_type:<15}"  # Transaktionstype
                 f"{butik:<20}"           # Butik
                 f"{timestamp:<26}"       # Timestamp
