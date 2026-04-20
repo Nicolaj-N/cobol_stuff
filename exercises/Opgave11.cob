@@ -210,8 +210,8 @@
            WRITE OUTPUT-RECORD
            STRING "Dato          "
                "Tidspunkt   "
-               "Transaktionstype        "
-               "Beloeb                  "
+               "Transaktionstype    "
+               "Beloeb          "
                "Butik"
                INTO OUTPUT-RECORD
            WRITE OUTPUT-RECORD.
@@ -272,7 +272,6 @@
                INTO OUTPUT-RECORD
            WRITE OUTPUT-RECORD
            
-           MOVE SPACES TO OUTPUT-RECORD
            MOVE TOTAL-UDBETALT TO TOTAL-UD-DISPLAY
            STRING "Totalt udbetalt" DELIMITED BY SIZE
                " " DELIMITED BY SIZE

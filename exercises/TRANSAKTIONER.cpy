@@ -4,7 +4,7 @@
        02  FØDSELSDATO         PIC X(10).
        02  KONTO-ID            PIC X(15).
        02  REG-NR              PIC X(4).
-       02  BELØB               PIC 99999999999V99.
+       02  BELØB-TEXT          PIC X(11).
        02  VALUTA              PIC X(3).
        02  TRANSAKTIONSTYPE    PIC X(15).
        02  BUTIK               PIC X(20).

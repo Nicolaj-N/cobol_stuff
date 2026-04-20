@@ -2,7 +2,7 @@ import random
 import datetime
 
 # Antal kunder i dataset
-NUM_CUSTOMERS = 10000
+NUM_CUSTOMERS = 100
 
 # Maks antal transaktioner pr. kunde
 MAX_TRANSACTIONS_PER_CUSTOMER = 10
