@@ -45,9 +45,12 @@
            COPY "BANKER.cpy".
        01  PREV-REC.
            COPY "TRANSAKTIONER.cpy".
+       01  TOP-3-ACCOUNTS OCCURS 3 TIMES.
+           COPY "Transaktioner.cpy".
+       01  TOP-1-BALANCE           PIC S9(18)V99 VALUE ZEROES.
+       01  TOP-2-BALANCE           PIC S9(18)V99 VALUE ZEROES.
+       01  TOP-3-BALANCE           PIC S9(18)V99 VALUE ZEROES.
        01  START-BALANCE           PIC 99999999999V99.
-       01  WS-FOUND-INDEX           PIC 999 VALUE 0.
-       01  WS-I                     PIC 999 VALUE 0.
        01  IX                      PIC 9999 VALUE 1.
        01  IX2                     PIC 99999 VALUE 1.
        01  IX3                     PIC 99999 VALUE 1.
@@ -132,17 +135,32 @@
                        PERFORM FORMAT-BANKINFO
                        PERFORM FORMAT-KOLONNE-NAVNE
                    END-IF
-                   DISPLAY "BALANCE SANITY CHECK" CUR-BALANCE
+
+                   IF CUR-BALANCE > TOP-1-BALANCE
+                       MOVE CUR-BALANCE TO TOP-1-BALANCE
+                       MOVE SORTED-REC TO TOP-3-ACCOUNTS(1)
+                   ELSE IF CUR-BALANCE > TOP-2-BALANCE
+                       MOVE CUR-BALANCE TO TOP-2-BALANCE
+                       MOVE SORTED-REC TO TOP-3-ACCOUNTS(2)
+                   ELSE IF CUR-BALANCE > TOP-3-BALANCE
+                       MOVE CUR-BALANCE TO TOP-3-BALANCE
+                       MOVE SORTED-REC TO TOP-3-ACCOUNTS(3)
+                   END-IF
+                       
                    MOVE FUNCTION 
                        NUMVAL(BELØB-TEXT OF SORTED-REC) TO BELØB-NUM
                    PERFORM FORMAT-VALUTATYPE
                    PERFORM FORMAT-SALDO
                    PERFORM FORMAT-TRANSAKTIONER
-                   DISPLAY "BALANCE SANITY CHECK" CUR-BALANCE
-                   DISPLAY "CUR VAL SANITY CHECK " CUR-VAL-DKK
                END-READ
            END-PERFORM
-
+           
+           DISPLAY NAVN OF TOP-3-ACCOUNTS(1)
+           DISPLAY TOP-1-BALANCE
+           DISPLAY NAVN OF TOP-3-ACCOUNTS(2)
+           DISPLAY TOP-2-BALANCE
+           DISPLAY NAVN OF TOP-3-ACCOUNTS(3)
+           DISPLAY TOP-3-BALANCE
            CLOSE BANKOPLYSNINGER
            CLOSE SORTED-TRANSAKTIONER
            CLOSE OUTPUT-FILE
