@@ -45,8 +45,9 @@
            COPY "BANKER.cpy".
        01  PREV-REC.
            COPY "TRANSAKTIONER.cpy".
-       01  TOP-3-ACCOUNTS OCCURS 3 TIMES.
-           COPY "Transaktioner.cpy".
+       01  TOP-1-ACCOUNT           PIC X(15) VALUE SPACES.
+       01  TOP-2-ACCOUNT           PIC X(15) VALUE SPACES.
+       01  TOP-3-ACCOUNT           PIC X(15) VALUE SPACES.
        01  TOP-1-BALANCE           PIC S9(18)V99 VALUE ZEROES.
        01  TOP-2-BALANCE           PIC S9(18)V99 VALUE ZEROES.
        01  TOP-3-BALANCE           PIC S9(18)V99 VALUE ZEROES.
@@ -61,6 +62,7 @@
        01  PREVIOUS-CHAR           PIC X(1) VALUE SPACE.
        01  BELØB-NUM               PIC S99999999999V99.
        01  CUR-REG                 PIC 9999 VALUE ZEROES.
+       01  CUR-ID                  PIC X(15) VALUE SPACES.
        01  CUR-BALANCE             PIC S9(18)V99 VALUE ZEROES.
        01  CUR-BALANCE-DISPLAY     PIC +ZZZ,ZZZ,ZZZ,ZZ9.99.
        01  CUR-VAL-DKK             PIC S9(18)V99 VALUE ZEROES.
@@ -110,10 +112,12 @@
                    MOVE 0 TO TOTAL-INDBETALT TOTAL-UDBETALT
                    MOVE 50000 TO CUR-BALANCE
                    MOVE REG-NR OF PREV-REC TO CUR-REG
+                   MOVE KONTO-ID OF PREV-REC TO CUR-ID
 
                    PERFORM FORMAT-KUNDEINFO
                    PERFORM FORMAT-BANKINFO
                    PERFORM FORMAT-KOLONNE-NAVNE
+                   DISPLAY "THIS RAN: " CUR-ID
            END-READ
            PERFORM UNTIL EOF-MAIN = "Y"
                READ SORTED-TRANSAKTIONER
@@ -121,45 +125,68 @@
                    PERFORM PRINT-SALDO
                    MOVE "Y" TO EOF-MAIN
                NOT AT END
+      *            DISPLAY "BEFORE IF"
                    IF KONTO-ID OF SORTED-REC NOT = KONTO-ID OF
                            PREV-REC
-
+      *                DISPLAY "START OF IF"
                        PERFORM PRINT-SALDO
                        MOVE 0 TO TOTAL-INDBETALT 
                        MOVE 0 TO TOTAL-UDBETALT
                        MOVE 50000 TO CUR-BALANCE
                        MOVE SORTED-REC TO PREV-REC
                        MOVE REG-NR OF PREV-REC TO CUR-REG
+                       MOVE KONTO-ID OF PREV-REC TO CUR-ID
                        
                        PERFORM FORMAT-KUNDEINFO
                        PERFORM FORMAT-BANKINFO
                        PERFORM FORMAT-KOLONNE-NAVNE
+      *                DISPLAY "THIS RAN2: " CUR-ID
                    END-IF
-
-                   IF CUR-BALANCE > TOP-1-BALANCE
-                       MOVE CUR-BALANCE TO TOP-1-BALANCE
-                       MOVE SORTED-REC TO TOP-3-ACCOUNTS(1)
-                   ELSE IF CUR-BALANCE > TOP-2-BALANCE
-                       MOVE CUR-BALANCE TO TOP-2-BALANCE
-                       MOVE SORTED-REC TO TOP-3-ACCOUNTS(2)
-                   ELSE IF CUR-BALANCE > TOP-3-BALANCE
-                       MOVE CUR-BALANCE TO TOP-3-BALANCE
-                       MOVE SORTED-REC TO TOP-3-ACCOUNTS(3)
-                   END-IF
-                       
+                   
                    MOVE FUNCTION 
                        NUMVAL(BELØB-TEXT OF SORTED-REC) TO BELØB-NUM
                    PERFORM FORMAT-VALUTATYPE
                    PERFORM FORMAT-SALDO
                    PERFORM FORMAT-TRANSAKTIONER
-               END-READ
+                   END-READ
+
+                   IF CUR-BALANCE > TOP-1-BALANCE
+                       MOVE TOP-1-BALANCE TO TOP-2-BALANCE
+                       MOVE TOP-3-ACCOUNTS(1) TO TOP-3-ACCOUNTS(2)
+                       MOVE CUR-BALANCE TO TOP-1-BALANCE
+                       MOVE SORTED-REC TO TOP-3-ACCOUNTS(1)
+                   ELSE IF CUR-BALANCE > TOP-2-BALANCE AND  
+                           CUR-ID NOT = KONTO-ID OF TOP-3-ACCOUNTS(1)
+                           DISPLAY "FIRST BRANCH "
+                           DISPLAY "ID OF CUR" CUR-ID
+                           DISPLAY "ID OF TOP 1"
+                           KONTO-ID OF TOP-3-ACCOUNTS(1)
+                       MOVE TOP-2-BALANCE TO TOP-3-BALANCE
+                       MOVE TOP-3-ACCOUNTS(2) TO TOP-3-ACCOUNTS(3)
+                       MOVE CUR-BALANCE TO TOP-2-BALANCE
+                       MOVE SORTED-REC TO TOP-3-ACCOUNTS(2)
+                   ELSE IF (CUR-BALANCE > TOP-3-BALANCE) AND 
+                           CUR-ID NOT = KONTO-ID OF TOP-3-ACCOUNTS(2) 
+                           AND 
+                           CUR-ID NOT = KONTO-ID OF TOP-3-ACCOUNTS(1)
+                           DISPLAY "SECOND BRANCH "
+                           DISPLAY "ID OF CUR" CUR-ID
+                           DISPLAY "ID OF TOP 1"
+                           KONTO-ID OF TOP-3-ACCOUNTS(1)
+                       MOVE CUR-BALANCE TO TOP-3-BALANCE
+                       MOVE SORTED-REC TO TOP-3-ACCOUNTS(3)
+                   END-IF
+                       
            END-PERFORM
            
            DISPLAY NAVN OF TOP-3-ACCOUNTS(1)
+           DISPLAY KONTO-ID OF TOP-3-ACCOUNTS(1)
            DISPLAY TOP-1-BALANCE
            DISPLAY NAVN OF TOP-3-ACCOUNTS(2)
+           DISPLAY KONTO-ID OF TOP-3-ACCOUNTS(2)
            DISPLAY TOP-2-BALANCE
            DISPLAY NAVN OF TOP-3-ACCOUNTS(3)
+           DISPLAY KONTO-ID OF TOP-3-ACCOUNTS(3)
            DISPLAY TOP-3-BALANCE
            CLOSE BANKOPLYSNINGER
            CLOSE SORTED-TRANSAKTIONER
@@ -256,7 +283,6 @@
                WRITE OUTPUT-RECORD.
 
        FORMAT-VALUTATYPE.
-           DISPLAY VALUTA OF SORTED-REC
            IF VALUTA OF SORTED-REC = "USD"
                COMPUTE CUR-VAL-DKK = (BELØB-NUM * 630) / 100
            END-IF
@@ -306,7 +332,8 @@
                "(DKK): " DELIMITED BY SIZE
                CUR-BALANCE-DISPLAY DELIMITED BY SIZE
                INTO OUTPUT-RECORD
-           WRITE OUTPUT-RECORD.
+           WRITE OUTPUT-RECORD
+           DISPLAY KONTO-ID OF PREV-REC CUR-BALANCE-DISPLAY.
 
             
 -
