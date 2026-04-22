@@ -2,7 +2,7 @@ import random
 import datetime
 
 # Antal kunder i dataset
-NUM_CUSTOMERS = 100
+NUM_CUSTOMERS = 10
 
 # Maks antal transaktioner pr. kunde
 MAX_TRANSACTIONS_PER_CUSTOMER = 10
@@ -34,7 +34,8 @@ BANK_NAMES = ["Danske Bank", "Nordea", "Jyske Bank", "Sydbank", "Nykredit Bank",
 
 # Fiktive valutakoder og transaktionstyper
 VALUTA_CODES = ["DKK", "USD", "EUR"]
-TRANSACTION_TYPES = ["Indbetaling", "Udbetaling", "Overførsel"]
+# TRANSACTION_TYPES = ["Indbetaling", "Udbetaling", "Overførsel"]
+TRANSACTION_TYPES = ["Indbetaling", "Udbetaling"]
 
 # Funktion til generering af en fødselsdato og CPR-lignende nummer
 def generate_cpr():
@@ -124,9 +125,12 @@ with open(TRANSACTION_FILE, "w", encoding="cp1252", newline="") as file:
         # Generér et tilfældigt antal transaktioner for denne kunde
         num_transactions = random.randint(1, MAX_TRANSACTIONS_PER_CUSTOMER)
         for _ in range(num_transactions):  # Loop over kundens transaktioner
-            transaktions_beløb = round(random.uniform(-100000.00, 100000.00), 2)  # Tilfældig beløb
             valutakode = random.choice(VALUTA_CODES)  # Tilfældig valutakode
             transaktions_type = random.choice(TRANSACTION_TYPES)  # Tilfældig type
+            if transaktions_type is "Indbetaling":
+                transaktions_beløb = round(random.uniform(1, 100000.00), 2)  # Tilfældigt beløb
+            else:
+                transaktions_beløb = round(random.uniform(-100000.00, -1), 2)  # Tilfældig beløb
             butik = random.choice(STORES)  # Tilfældig butik
             timestamp = generate_transaction_timestamp()  # Timestamp i formatet YYYY-MM-DD-HH.MM.SS.MMMMMM
 

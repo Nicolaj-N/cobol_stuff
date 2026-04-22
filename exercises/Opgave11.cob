@@ -7,8 +7,6 @@
            ALPHABET EUROPEAN-EXTENDED IS STANDARD-1.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT BANKOPLYSNINGER ASSIGN TO "Banker.txt"
-               ORGANIZATION IS LINE SEQUENTIAL.
            SELECT TRANSAKTIONER ASSIGN TO "Transaktioner.txt"
                ORGANIZATION IS LINE SEQUENTIAL.
            SELECT SORT-TRANSAKTIONER ASSIGN TO "WRK.tmp".
@@ -20,10 +18,6 @@
        
        DATA DIVISION.
        FILE SECTION.
-       FD  BANKOPLYSNINGER.
-           01  BANKOPL-IN.
-               COPY "BANKER.cpy".
-
        FD  TRANSAKTIONER.
            01  TRANSAKTIONER-IN.
                COPY "TRANSAKTIONER.cpy".
@@ -41,29 +35,27 @@
                02  NAVN-ADR            PIC X(300) VALUE SPACES.
 
        WORKING-STORAGE SECTION.
-       01  BANKOPL-AR OCCURS 100 TIMES.
-           COPY "BANKER.cpy".
-       01  PREV-REC.
+       01  PREVIOUS-REC.
            COPY "TRANSAKTIONER.cpy".
-       01  TOP-1-ACCOUNT           PIC X(15) VALUE SPACES.
-       01  TOP-2-ACCOUNT           PIC X(15) VALUE SPACES.
-       01  TOP-3-ACCOUNT           PIC X(15) VALUE SPACES.
-       01  TOP-1-BALANCE           PIC S9(18)V99 VALUE ZEROES.
-       01  TOP-2-BALANCE           PIC S9(18)V99 VALUE ZEROES.
-       01  TOP-3-BALANCE           PIC S9(18)V99 VALUE ZEROES.
-       01  START-BALANCE           PIC 99999999999V99.
-       01  IX                      PIC 9999 VALUE 1.
-       01  IX2                     PIC 99999 VALUE 1.
-       01  IX3                     PIC 99999 VALUE 1.
-       01  BLANKSPACE              PIC X(40) VALUE SPACES.
-       01  ANTAL-BANK              PIC 999 VALUE ZEROES.
-       01  ANTAL-KUNDER            PIC 999 VALUE ZEROES.
+       01  TOP-3-ACCOUNTS OCCURS 3 TIMES.
+           02 KUNDE-ID             PIC X(15) VALUE SPACES.
+           02 KUNDE-NAVN           PIC X(30) VALUE SPACES.
+           02 KUNDE-SALDO          PIC S99999999999V99 VALUE -9999999.
+       01  MONTHLY-STATS OCCURS 12 TIMES.
+           02 INDBETALINGDKK       PIC S99999999999V99 VALUE 0.
+           02 UDBETALINGDKK        PIC S99999999999V99 VALUE 0.
+       01  CUR-MONTH               PIC 99.             
+       01  BUTIK-COUNTER.
+           05 BUTIK-COUNT OCCURS 100 TIMES INDEXED BY IDX.
+               10 BUTIK-KEY        PIC X(20).
+               10 BUTIK-CNT        PIC 9(5) VALUE 0.
        01  CURRENT-CHAR            PIC X(1).
        01  PREVIOUS-CHAR           PIC X(1) VALUE SPACE.
        01  BELØB-NUM               PIC S99999999999V99.
-       01  CUR-REG                 PIC 9999 VALUE ZEROES.
+       01  IX                      PIC S999999 VALUE 1.
        01  CUR-ID                  PIC X(15) VALUE SPACES.
-       01  CUR-BALANCE             PIC S9(18)V99 VALUE ZEROES.
+       01  CUR-LINE-VAL-DKK        PIC S9(18)V99 VALUE ZEROES.
+       01  CUR-ACC-SALDO           PIC S9(18)V99 VALUE ZEROES.
        01  CUR-BALANCE-DISPLAY     PIC +ZZZ,ZZZ,ZZZ,ZZ9.99.
        01  CUR-VAL-DKK             PIC S9(18)V99 VALUE ZEROES.
        01  CUR-VAL-DKK-DISPLAY     PIC +ZZZ,ZZZ,ZZZ,ZZ9.99.
@@ -87,253 +79,163 @@
                            TIDSPUNKT OF SORT-REC
                USING TRANSAKTIONER GIVING SORTED-TRANSAKTIONER.
            
-           OPEN INPUT BANKOPLYSNINGER
            OPEN INPUT SORTED-TRANSAKTIONER
            OPEN OUTPUT OUTPUT-FILE
-           
-           PERFORM UNTIL EOF-BANK = "Y"
-               READ BANKOPLYSNINGER
-               AT END
-                   MOVE "Y" TO EOF-BANK
-               NOT AT END
-                   MOVE BANKOPL-IN TO BANKOPL-AR(IX)
-                   ADD 1 TO IX
-               END-READ
-           END-PERFORM
-           
-           MOVE 1 TO IX
 
            READ SORTED-TRANSAKTIONER
                AT END
                    MOVE "Y" TO EOF-MAIN
                NOT AT END
-                   MOVE SORTED-REC TO PREV-REC
-
-                   MOVE 0 TO TOTAL-INDBETALT TOTAL-UDBETALT
-                   MOVE 50000 TO CUR-BALANCE
-                   MOVE REG-NR OF PREV-REC TO CUR-REG
-                   MOVE KONTO-ID OF PREV-REC TO CUR-ID
-
-                   PERFORM FORMAT-KUNDEINFO
-                   PERFORM FORMAT-BANKINFO
-                   PERFORM FORMAT-KOLONNE-NAVNE
-                   DISPLAY "THIS RAN: " CUR-ID
+                   MOVE 50000 TO CUR-ACC-SALDO
+                   PERFORM CONVERT-TO-DKK
+                   ADD CUR-LINE-VAL-DKK TO CUR-ACC-SALDO
+                   MOVE SORTED-REC TO PREVIOUS-REC
+      *            PERFORM COUNT-BUTIK
            END-READ
+           
            PERFORM UNTIL EOF-MAIN = "Y"
                READ SORTED-TRANSAKTIONER
                AT END
-                   PERFORM PRINT-SALDO
+                   DISPLAY IX "    OCCURENCES OF    " 
+                       KONTO-ID OF PREVIOUS-REC
+                       " WITH A TOTAL BALANCE OF: "
+                       CUR-ACC-SALDO
+                   PERFORM HANDLE-TOP-3
+                   DISPLAY TOP-3-ACCOUNTS(1)
+                   DISPLAY TOP-3-ACCOUNTS(2)
+                   DISPLAY TOP-3-ACCOUNTS(3)
                    MOVE "Y" TO EOF-MAIN
                NOT AT END
-      *            DISPLAY "BEFORE IF"
-                   IF KONTO-ID OF SORTED-REC NOT = KONTO-ID OF
-                           PREV-REC
-      *                DISPLAY "START OF IF"
-                       PERFORM PRINT-SALDO
-                       MOVE 0 TO TOTAL-INDBETALT 
-                       MOVE 0 TO TOTAL-UDBETALT
-                       MOVE 50000 TO CUR-BALANCE
-                       MOVE SORTED-REC TO PREV-REC
-                       MOVE REG-NR OF PREV-REC TO CUR-REG
-                       MOVE KONTO-ID OF PREV-REC TO CUR-ID
+                   IF KONTO-ID OF SORTED-REC NOT
+                           = KONTO-ID OF PREVIOUS-REC
+                       DISPLAY IX "    OCCURENCES OF    " 
+                           KONTO-ID OF PREVIOUS-REC 
+                           " WITH A TOTAL BALANCE OF: "
+                           CUR-ACC-SALDO
                        
-                       PERFORM FORMAT-KUNDEINFO
-                       PERFORM FORMAT-BANKINFO
-                       PERFORM FORMAT-KOLONNE-NAVNE
-      *                DISPLAY "THIS RAN2: " CUR-ID
-                   END-IF
-                   
-                   MOVE FUNCTION 
-                       NUMVAL(BELØB-TEXT OF SORTED-REC) TO BELØB-NUM
-                   PERFORM FORMAT-VALUTATYPE
-                   PERFORM FORMAT-SALDO
-                   PERFORM FORMAT-TRANSAKTIONER
-                   END-READ
+                       PERFORM HANDLE-TOP-3
 
-                   IF CUR-BALANCE > TOP-1-BALANCE
-                       MOVE TOP-1-BALANCE TO TOP-2-BALANCE
-                       MOVE TOP-3-ACCOUNTS(1) TO TOP-3-ACCOUNTS(2)
-                       MOVE CUR-BALANCE TO TOP-1-BALANCE
-                       MOVE SORTED-REC TO TOP-3-ACCOUNTS(1)
-                   ELSE IF CUR-BALANCE > TOP-2-BALANCE AND  
-                           CUR-ID NOT = KONTO-ID OF TOP-3-ACCOUNTS(1)
-                           DISPLAY "FIRST BRANCH "
-                           DISPLAY "ID OF CUR" CUR-ID
-                           DISPLAY "ID OF TOP 1"
-                           KONTO-ID OF TOP-3-ACCOUNTS(1)
-                       MOVE TOP-2-BALANCE TO TOP-3-BALANCE
-                       MOVE TOP-3-ACCOUNTS(2) TO TOP-3-ACCOUNTS(3)
-                       MOVE CUR-BALANCE TO TOP-2-BALANCE
-                       MOVE SORTED-REC TO TOP-3-ACCOUNTS(2)
-                   ELSE IF (CUR-BALANCE > TOP-3-BALANCE) AND 
-                           CUR-ID NOT = KONTO-ID OF TOP-3-ACCOUNTS(2) 
-                           AND 
-                           CUR-ID NOT = KONTO-ID OF TOP-3-ACCOUNTS(1)
-                           DISPLAY "SECOND BRANCH "
-                           DISPLAY "ID OF CUR" CUR-ID
-                           DISPLAY "ID OF TOP 1"
-                           KONTO-ID OF TOP-3-ACCOUNTS(1)
-                       MOVE CUR-BALANCE TO TOP-3-BALANCE
-                       MOVE SORTED-REC TO TOP-3-ACCOUNTS(3)
+                       MOVE SORTED-REC TO PREVIOUS-REC
+                       MOVE 50000 TO CUR-ACC-SALDO
+                       DISPLAY "TEST BUH " CUR-ACC-SALDO
+                       MOVE 1 TO IX
+                   ELSE
+                       ADD 1 TO IX
                    END-IF
-                       
+
+                   PERFORM CONVERT-TO-DKK
+                   PERFORM HANDLE-MONTHS
+      *            PERFORM COUNT-BUTIK
+                   ADD CUR-LINE-VAL-DKK TO CUR-ACC-SALDO
+               END-READ
            END-PERFORM
-           
-           DISPLAY NAVN OF TOP-3-ACCOUNTS(1)
-           DISPLAY KONTO-ID OF TOP-3-ACCOUNTS(1)
-           DISPLAY TOP-1-BALANCE
-           DISPLAY NAVN OF TOP-3-ACCOUNTS(2)
-           DISPLAY KONTO-ID OF TOP-3-ACCOUNTS(2)
-           DISPLAY TOP-2-BALANCE
-           DISPLAY NAVN OF TOP-3-ACCOUNTS(3)
-           DISPLAY KONTO-ID OF TOP-3-ACCOUNTS(3)
-           DISPLAY TOP-3-BALANCE
-           CLOSE BANKOPLYSNINGER
+           DISPLAY TIDSPUNKT OF SORTED-REC (6:2)
+           DISPLAY CUR-MONTH
+           DISPLAY "JAN " INDBETALINGDKK OF MONTHLY-STATS(1) "        "
+               UDBETALINGDKK OF MONTHLY-STATS(1)
+           DISPLAY "FEB " INDBETALINGDKK OF MONTHLY-STATS(2) "        "
+               UDBETALINGDKK OF MONTHLY-STATS(2)
+           DISPLAY "MAR " INDBETALINGDKK OF MONTHLY-STATS(3) "        "
+               UDBETALINGDKK OF MONTHLY-STATS(3)
+           DISPLAY "APR " INDBETALINGDKK OF MONTHLY-STATS(4) "        "
+               UDBETALINGDKK OF MONTHLY-STATS(4)
+           DISPLAY "MAJ " INDBETALINGDKK OF MONTHLY-STATS(5) "        "
+               UDBETALINGDKK OF MONTHLY-STATS(5)
+           DISPLAY "JUN " INDBETALINGDKK OF MONTHLY-STATS(6) "        "
+               UDBETALINGDKK OF MONTHLY-STATS(6)
+           DISPLAY "JUL " INDBETALINGDKK OF MONTHLY-STATS(7) "        "
+               UDBETALINGDKK OF MONTHLY-STATS(7)
+           DISPLAY "AUG " INDBETALINGDKK OF MONTHLY-STATS(8) "        "
+               UDBETALINGDKK OF MONTHLY-STATS(8)
+           DISPLAY "SEP " INDBETALINGDKK OF MONTHLY-STATS(9) "        "
+               UDBETALINGDKK OF MONTHLY-STATS(9)
+           DISPLAY "OKT " INDBETALINGDKK OF MONTHLY-STATS(10) "        "
+               UDBETALINGDKK OF MONTHLY-STATS(10)
+           DISPLAY "NOV " INDBETALINGDKK OF MONTHLY-STATS(11) "        "
+               UDBETALINGDKK OF MONTHLY-STATS(11)
+           DISPLAY "DEC " INDBETALINGDKK OF MONTHLY-STATS(12) "        "
+               UDBETALINGDKK OF MONTHLY-STATS(12)
+      *    PERFORM DISPLAY-BUTIK-COUNTS
            CLOSE SORTED-TRANSAKTIONER
            CLOSE OUTPUT-FILE
            STOP RUN.
        
-       FORMAT-KUNDEINFO.
-               MOVE "--------------------------------------------"
-                   TO OUTPUT-RECORD
-               WRITE OUTPUT-RECORD
-               MOVE SPACES TO OUTPUT-RECORD
-               STRING "Kunde: " DELIMITED BY SIZE
-                   NAVN OF SORTED-REC DELIMITED BY SIZE
-                   INTO OUTPUT-RECORD
-               END-STRING
-               WRITE OUTPUT-RECORD
-               STRING "Adresse: " DELIMITED BY SIZE
-                   ADRESSE OF SORTED-REC DELIMITED BY SIZE
-                   INTO OUTPUT-RECORD
-               END-STRING
-               WRITE OUTPUT-RECORD.
-
-       FORMAT-BANKINFO.
-               MOVE SPACES TO OUTPUT-RECORD
-               STRING BLANKSPACE DELIMITED BY SIZE
-                   "Registreringsnummer: " DELIMITED BY SIZE
-                   REG-NR OF BANKOPL-AR(CUR-REG) DELIMITED BY SIZE
-                   INTO OUTPUT-RECORD
-               END-STRING
-               WRITE OUTPUT-RECORD
-           
-               MOVE SPACES TO OUTPUT-RECORD
-               STRING BLANKSPACE DELIMITED BY SIZE
-                   "Bank: " DELIMITED BY SIZE
-                   BANKNAVN OF BANKOPL-AR(CUR-REG) DELIMITED BY SIZE
-                   INTO OUTPUT-RECORD
-               END-STRING
-               WRITE OUTPUT-RECORD
-           
-               MOVE SPACES TO OUTPUT-RECORD
-               STRING BLANKSPACE DELIMITED BY SIZE
-                   "Bankadresse: " DELIMITED BY SIZE
-                   BANKADRESSE OF BANKOPL-AR(CUR-REG) DELIMITED BY SIZE
-                   INTO OUTPUT-RECORD
-               END-STRING
-               WRITE OUTPUT-RECORD
-           
-               MOVE SPACES TO OUTPUT-RECORD
-               STRING BLANKSPACE DELIMITED BY SIZE
-                   "Telefon: " DELIMITED BY SIZE
-                   TELEFON OF BANKOPL-AR(CUR-REG) DELIMITED BY SIZE
-                   INTO OUTPUT-RECORD
-               END-STRING
-               WRITE OUTPUT-RECORD
-           
-               MOVE SPACES TO OUTPUT-RECORD
-               STRING BLANKSPACE DELIMITED BY SIZE
-                   "E-mail: " DELIMITED BY SIZE
-                   EMAIL OF BANKOPL-AR(CUR-REG) DELIMITED BY SIZE
-                   INTO OUTPUT-RECORD
-               END-STRING
-               WRITE OUTPUT-RECORD.
-
-       FORMAT-KOLONNE-NAVNE.
-           MOVE SPACES TO OUTPUT-RECORD
-           WRITE OUTPUT-RECORD
-           STRING "Dato          "
-               "Tidspunkt   "
-               "Transaktionstype    "
-               "Beloeb          "
-               "Butik"
-               INTO OUTPUT-RECORD
-           WRITE OUTPUT-RECORD.
-          
-       FORMAT-TRANSAKTIONER.
-               MOVE SPACES TO OUTPUT-RECORD
-               UNSTRING TIDSPUNKT OF SORTED-REC
-                   INTO WS-DATE-STRING, CURRENT-CHAR, WS-TIME-STRING
-               
-               STRING WS-DATE-STRING DELIMITED BY SIZE
-                   "    " DELIMITED BY SIZE
-                   WS-TIME-STRING DELIMITED BY SIZE
-                   "    " DELIMITED BY SIZE 
-                   TRANSAKTIONSTYPE OF SORTED-REC DELIMITED BY SIZE
-                   CUR-VAL-DKK-DISPLAY DELIMITED BY SIZE
-                   "DKK "
-                   "("
-                   VALUTA OF SORTED-REC DELIMITED BY SIZE
-                   ")"
-                   "     " DELIMITED BY SIZE
-                   BUTIK OF SORTED-REC DELIMITED BY SIZE
-                   INTO OUTPUT-RECORD
-               END-STRING
-               WRITE OUTPUT-RECORD.
-
-       FORMAT-VALUTATYPE.
+       CONVERT-TO-DKK.
+           MOVE FUNCTION
+               NUMVAL(BELØB-TEXT OF SORTED-REC) TO BELØB-NUM
            IF VALUTA OF SORTED-REC = "USD"
-               COMPUTE CUR-VAL-DKK = (BELØB-NUM * 630) / 100
-           END-IF
-           
-           IF VALUTA OF SORTED-REC = "EUR"
-               COMPUTE CUR-VAL-DKK = (BELØB-NUM * 750) / 100
-           END-IF
-           
-           IF VALUTA OF SORTED-REC = "DKK"
-               COMPUTE CUR-VAL-DKK = (BELØB-NUM * 100) / 100
-           END-IF
-           MOVE CUR-VAL-DKK TO CUR-VAL-DKK-DISPLAY.
-       
-       FORMAT-SALDO.
-           IF CUR-VAL-DKK < 0
-               ADD CUR-VAL-DKK TO TOTAL-UDBETALT
-               ADD CUR-VAL-DKK TO CUR-BALANCE
+               COMPUTE CUR-LINE-VAL-DKK =
+               BELØB-NUM * 6.30
+           ELSE IF VALUTA OF SORTED-REC = "EUR"
+               COMPUTE CUR-LINE-VAL-DKK =
+               BELØB-NUM * 7.50
            ELSE
-               ADD CUR-VAL-DKK TO TOTAL-INDBETALT
-               ADD CUR-VAL-DKK TO CUR-BALANCE
+               COMPUTE CUR-LINE-VAL-DKK =
+               BELØB-NUM * 1.00
+           END-IF.
+       
+       HANDLE-TOP-3.
+           IF CUR-ACC-SALDO > KUNDE-SALDO OF TOP-3-ACCOUNTS(1)
+               MOVE TOP-3-ACCOUNTS(2) TO TOP-3-ACCOUNTS(3)
+               MOVE TOP-3-ACCOUNTS(1) TO TOP-3-ACCOUNTS(2)
+               MOVE NAVN OF PREVIOUS-REC TO 
+                   KUNDE-NAVN OF TOP-3-ACCOUNTS(1)
+               MOVE KONTO-ID OF PREVIOUS-REC TO 
+                   KUNDE-ID OF TOP-3-ACCOUNTS(1)
+               MOVE CUR-ACC-SALDO TO 
+                   KUNDE-SALDO OF TOP-3-ACCOUNTS(1)
+           ELSE IF CUR-ACC-SALDO > KUNDE-SALDO OF TOP-3-ACCOUNTS(2)
+               MOVE TOP-3-ACCOUNTS(2) TO TOP-3-ACCOUNTS(3)
+               MOVE NAVN OF PREVIOUS-REC TO 
+                   KUNDE-NAVN OF TOP-3-ACCOUNTS(2)
+               MOVE KONTO-ID OF PREVIOUS-REC TO 
+                   KUNDE-ID OF TOP-3-ACCOUNTS(2)
+               MOVE CUR-ACC-SALDO TO 
+                   KUNDE-SALDO OF TOP-3-ACCOUNTS(2)
+           ELSE IF CUR-ACC-SALDO > KUNDE-SALDO OF TOP-3-ACCOUNTS(3)
+               MOVE NAVN OF PREVIOUS-REC TO 
+                   KUNDE-NAVN OF TOP-3-ACCOUNTS(3)
+               MOVE KONTO-ID OF PREVIOUS-REC TO 
+                   KUNDE-ID OF TOP-3-ACCOUNTS(3)
+               MOVE CUR-ACC-SALDO TO KUNDE-SALDO OF TOP-3-ACCOUNTS(3)
+           END-IF.
+       
+       HANDLE-MONTHS.
+           MOVE TIDSPUNKT OF SORTED-REC (6:2) TO CUR-MONTH
+           IF TRANSAKTIONSTYPE OF SORTED-REC = "Indbetaling"
+               ADD CUR-LINE-VAL-DKK TO INDBETALINGDKK OF 
+                   MONTHLY-STATS(CUR-MONTH)
+           ELSE IF TRANSAKTIONSTYPE OF SORTED-REC = "Udbetaling"
+               ADD CUR-LINE-VAL-DKK TO UDBETALINGDKK OF 
+                   MONTHLY-STATS(CUR-MONTH)
            END-IF.
 
-       PRINT-SALDO.
-           MOVE SPACES TO OUTPUT-RECORD
-           WRITE OUTPUT-RECORD
-           MOVE TOTAL-INDBETALT TO TOTAL-IND-DISPLAY
-           STRING "Totalt indbetalt" DELIMITED BY SIZE
-               " " DELIMITED BY SIZE
-               "(DKK): " DELIMITED BY SIZE
-               TOTAL-IND-DISPLAY DELIMITED BY SIZE
-               INTO OUTPUT-RECORD
-           WRITE OUTPUT-RECORD
-           
-           MOVE TOTAL-UDBETALT TO TOTAL-UD-DISPLAY
-           STRING "Totalt udbetalt" DELIMITED BY SIZE
-               " " DELIMITED BY SIZE
-               "(DKK): " DELIMITED BY SIZE
-               TOTAL-UD-DISPLAY DELIMITED BY SIZE
-               INTO OUTPUT-RECORD
-           WRITE OUTPUT-RECORD
-           
-           MOVE SPACES TO OUTPUT-RECORD
-           WRITE OUTPUT-RECORD
-           MOVE CUR-BALANCE TO CUR-BALANCE-DISPLAY
-           STRING "Saldo" DELIMITED BY SIZE
-               " " DELIMITED BY SIZE
-               "(DKK): " DELIMITED BY SIZE
-               CUR-BALANCE-DISPLAY DELIMITED BY SIZE
-               INTO OUTPUT-RECORD
-           WRITE OUTPUT-RECORD
-           DISPLAY KONTO-ID OF PREV-REC CUR-BALANCE-DISPLAY.
-
-            
--
+      *COUNT-BUTIK.
+      *    MOVE BUTIK OF SORTED-REC TO BUTIK-KEY OF BUTIK-COUNT(1)
+      *    PERFORM FIND-BUTIK
+      *    ADD 1 TO BUTIK-COUNT(1).
+      * 
+      *FIND-BUTIK.
+      *    SET IDX TO 1
+      *    PERFORM UNTIL IDX > 100
+      *        IF BUTIK-KEY OF BUTIK-COUNT(IDX) = BUTIK OF SORTED-REC
+      *            ADD 1 TO BUTIK-CNT OF BUTIK-COUNT(IDX)
+      *            EXIT PERFORM
+      *        END-IF
+      *        ADD 1 TO IDX
+      *    END-PERFORM
+      *    IF IDX > 100
+      *        DISPLAY "Butik not found in BUTIK-COUNT table"
+      *    END-IF.
+      * 
+      *DISPLAY-BUTIK-COUNTS.
+      *    DISPLAY "BUTIK COUNTS:"
+      *    SET IDX TO 1
+      *    PERFORM UNTIL IDX > 100
+      *        IF BUTIK-CNT OF BUTIK-COUNT(IDX) > 0
+      *            DISPLAY "BUTIK: " BUTIK-KEY OF BUTIK-COUNT(IDX)
+      *                    " COUNT: " BUTIK-CNT OF BUTIK-COUNT(IDX)
+      *        END-IF
+      *        ADD 1 TO IDX
+      *    END-PERFORM.
+        
